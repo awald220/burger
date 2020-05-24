@@ -9,3 +9,21 @@
 // updateOne()
 
 // Export the ORM object in module.exports.
+
+//import the connection to mysql
+var connection = require("../config/connection.js");
+
+function selectAll() {
+
+}
+
+function insertOne() {
+
+}
+
+function updateOne() {
+
+}
+
+
+module.exports = orm;
