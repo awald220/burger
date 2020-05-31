@@ -7,27 +7,25 @@
 // Export at the end of the burger.js file.
 
 //Import ORM
-var orm = require("../config/orm.js");
+$(".create-form").on("submit", function(event){
+    event.preventDefault();
 
-var burger = {
-    selectAll: function(cb){
-        orm.selectAll('burgers', function(res){
-            cb(res);
-        });
-    },
+    var newBurger = {
+        name: ("#create").val().trim(),
+        devoured: ("[name-devoured]:checked").val().trim();
+    };
 
-    insertOne: function(cols, vals, cb){
-        orm.insertOne('burgers', cols, vals, function(res){
-            cb(res);
-        });
-    },
-
-    updateOne: function(objColVals, con, cb){
-        orm.updateOne('burgers', objColVals, con, function(res){
-            cb(res);
-        });
-    }
-};
-
+    //send the POST request
+    $.ajax("/api/burgers", {
+        type: "POST",
+        data: newBurger
+    }).then(
+        function(){
+            console.log("created the burger");
+            //reload the page to get the new content
+            location.reload();
+        }
+    )
+})
 //export
 module.exports = burger;
