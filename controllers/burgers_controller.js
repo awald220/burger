@@ -18,31 +18,29 @@ var burger = require ('../models/burger.js')
 //Create the needed Routes
 
 router.get("/", function(req, res){
-    burger.selectAll(function(data){
-        var hbsObject = {
-            burgers: data
-        };
+  res.redirect('/burgers');
+});
+
+router.get('/burgers', function (req, res) {
+    burger.all(function (data) {
+      var hbsObject = { burgers: data };
+    //  console.log(hbsObject);
+      res.render('index', hbsObject);
+    });
+  });
+
+router.post("/api/burgers", function(req, res){
+    burger.create([req.body.burger_name], function(data){
+       res.redirect('/burgers');
     });
 });
 
-router.post("/burgers", function(req, res){
-    burger.insertOne([
-        "burger_name"
-    ],[
-        req.body.burger_name
-    ], function(data){
-        res.redirect("/");
-    });
-});
+router.put("/api/burger/:id", function(req, res){
+    var condition = 'id = ' + req.params.id;
 
-router.put("/burger/:id", function(req, res){
-    var con = 'id = ' + req.params.id;
-
-    burger.updateOne({
-        devoured: true
-    }, con, function(data){
-        res.redirect("/");
-    });
+    burger.update({ devoured: req.body.devoured }, condition, function () {
+        res.redirect('/burgers');
+      });
 });
 
 //Export module

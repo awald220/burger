@@ -11,7 +11,7 @@
 // Export the ORM object in module.exports.
 
 //import the connection to mysql
-var connection = require("../config/connection.js");
+var connection = require("./connection.js");
 
 function printQuestionMarks(mun){
     var arr = [];
@@ -40,7 +40,7 @@ function objToSql(ob){
 
 var orm = {
     all: function(tableInput, cb){
-        var queryString = "SELECT * FROM " + tableInput + ";";
+        var queryString = "SELECT * FROM " + tableInput;
         connection.query(queryString, function(err, result){
             if (err) {
                 throw err;
