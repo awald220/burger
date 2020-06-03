@@ -1,64 +1,70 @@
-<div id="logoImg">
-    <img  src="\assets\img\burgerbash.png">
-</div>
+<div class="container">
+  <div id="title">
+    <p>Eat-Da-Burger</p>
+  </div>
 
-<div id="logoText">Feed your Soul!</div>
-
-<div class="row">
-    <div class="col-md-4">
-      <h3>Burgers Created</h3>
-         {{#each burgers}}
-         {{#unless this.devoured}}
-    
-       <div class="row">
-          <div class="col-md-12">
-        
-
-              <form id="frmDevour" action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-                <input type="hidden" name="devoured" value="1">&nbsp;{{this.id}}. {{this.burger_name}}&nbsp;&nbsp;
-                <button type="submit" class="btn-xs">eat!</button>
-
-              </form>
-          </div>
-        </div>
-        {{/unless}}
-     {{/each}}
-    </div>  <!-- close out the outer col div -->
-
-
-  <!-- start: middle div for input box to type in a new burger -->
-  <div class="col-md-4">
-
-                <h3>Add a Burger</h3>
-               
-                <form class="form-inline" action="burgers/create" method="POST">
-                <div class="form-group">
-                  <label for="email">Burger Name:</label>
-                  <input type="text" class="form-control" name="burger_name" id="ca">
-                  <input type="hidden" name="devoured" value="1">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-              </form>
-
-  </div>   <!-- end: middle div for input box to type in a new burger -->
-
-
-  <div class="col-md-4">
-    <h3>Devoured Burgers</h3>
-            {{#each burgers}}
-             {{#if this.devoured}}
-                <div class="row">
-                  <div class="col-md-12">
-                        <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-                            <input type="hidden" name="devoured" value="0">&nbsp;{{this.id}}. {{this.burger_name}}&nbsp;&nbsp;
-                            <button type="submit" class="btn-xs">Reset</button>
-                        </form>
-                  </div>
-               </div>
-              {{/if}}
-                
-             {{/each}}
+  <div class="col-xs-6 col-sm-4">
+    <div class="panel panel-default">
+      <div id="heading" class="panel panel-heading">
+        <h2>Burgers to devour</h2>
       </div>
-
+      <div class="panel panel=body">
+        <ul>
+          {{#each burgers}}
+            {{#unless this.devoured}}
+              <li>
+                {{this.burger_name}}
+                <form action="index/update/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="1">
+                  <button type="submit">Devour It</button>
+                </form>
+              </li>
+            {{/unless}}
+          {{/each}}
+        </ul>
+      </div>
+  </div>
 </div>
 
+  <div class="col-xs-6 col-sm-4">
+    <div class="panel panel-default">
+      <div id="heading" class="panel panel-heading">
+        <h2>Add a Burger</h2>
+      </div>
+      <div id="addBurger" class="panel panel-body">
+        <form class="create-update-form" action="index/create" method="POST">
+          <div class="form-group">
+            <input type="text" placeholder="Burger Name" id="burger" name="burger_name">
+          </div>
+          <div class="form-group">
+            <label for="devoured"></label>
+            <input type="hidden" name="devoured" value="0" checked>
+          </div>
+          <button type="submit">Add Burger</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-6 col-sm-4">
+    <div class="panel panel-default">
+      <div id="heading" class="panel panel-heading">
+        <h2>Burgers devoured</h2>
+      </div>
+      <div class="panel panel-body">
+        <ul>
+          {{#each burgers}}
+            {{#if this.devoured}}
+              <li>
+                {{this.burger_name}}
+                <form action="index/update/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="0">
+                  <button type="submit">Spit It Out</button>
+                </form>
+              </li>
+            {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>

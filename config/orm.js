@@ -13,7 +13,7 @@
 //import the connection to mysql
 var connection = require("./connection.js");
 
-function printQuestionMarks(mun){
+function printQuestionMarks(num){
     var arr = [];
 
     for (var i = 0; i < num; i++){
@@ -44,6 +44,7 @@ var orm = {
         connection.query(queryString, function(err, result){
             if (err) {
                 throw err;
+                
             }
             cb(result);
         })
@@ -63,6 +64,7 @@ var orm = {
         connection.query(queryString, vals, function(err, result){
             if(err) {
                 throw err;
+                
             }
             cb(result);
         });
@@ -80,8 +82,9 @@ var orm = {
         connection.query(queryString, function(err, result){
             if (err) {
                 throw err;
+               
             }
-            cb(result);
+             cb(result);
         });
     }
     
