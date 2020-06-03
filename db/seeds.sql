@@ -1,10 +1,9 @@
-INSERT INTO burgers (name)
-VALUES ("Cheeseburger");
 
-INSERT INTO burgers (name)
-VALUES ("Bacon Cheeseburger");
+INSERT INTO burgers (burger_name, devoured)
+VALUES ("Cheeseburger", false);
 
-INSERT INTO burgers (name)
-VALUES ("Mushroom Swiss Burger")
+INSERT INTO burgers (burger_name, devoured)
+VALUES ("Bacon Cheeseburger", false);
 
--- still on step 4 of the set fup file db
+INSERT INTO burgers (burger_name, devoured)
+VALUES ("Mushroom Swiss Burger", false);
